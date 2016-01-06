@@ -1,5 +1,5 @@
 {
-  "name": "react-skeleton",
+  "name": "react-calculator",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/devslopes/react-skeleton.git"
+    "url": "git+https://github.com/vanshady/react-calculator.git"
   },
   "author": "Minwei Xu",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/devslopes/react-skeleton/issues"
+    "url": "https://github.com/devslopes/react-calculator/issues"
   },
-  "homepage": "https://github.com/devslopes/react-skeleton#readme",
+  "homepage": "https://github.com/vanshady/react-calculator#readme",
   "dependencies": {
     "babel-preset-react": "^6.1.18",
     "babelify": "^7.2.0",

@@ -19172,6 +19172,6 @@ ReactDOM.render(React.createElement(
   ' ',
   React.createElement(App, null),
   ' '
-), document.getElementById('app'));
+), document.getElementById('weatherApp'));
 
 },{"./components/AppManager.jsx":159,"react":157,"react-dom":1}]},{},[161]);
