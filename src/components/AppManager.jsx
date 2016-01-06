@@ -1,7 +1,38 @@
 var React = require('react');
 
 var Button = require('./Button.jsx');
-
+var whichSign = (val) => {
+    var plus = val.indexOf("+");
+    var minus = val.indexOf("-");
+    var times = val.indexOf("*");
+    var division = val.indexOf("÷");
+    var sum = plus + minus + times + division;
+    if (plus !== -1 && (sum - plus) === -3)
+        return "+";
+    if (minus !== -1 && (sum - minus) === -3)
+        return "-";
+    if (times !== -1 && (sum - times) === -3)
+        return "*";
+    if (division !== -1 && (sum - division) === -3)
+        return "÷";
+    return "fail";
+};
+var evaluate = (fN, sign, sN) => {
+    switch (sign) {
+        case "+":
+            return fN + sN;
+            break;
+        case "-":
+            return fN - sN;
+            break;
+        case "*":
+            return fN * sN;
+            break;
+        case "÷":
+            return fN / sN;
+            break;
+    }
+};
 var AppManager = React.createClass({
     getInitialState: function() {
         return {value: ""}
@@ -19,61 +50,19 @@ var AppManager = React.createClass({
     },
     onEvaluate: function() {
         var val = this.state.value;
-        if (val.indexOf("+") !== -1 && val.indexOf("–") === -1 && val.indexOf("*") === -1 && val.indexOf("÷") === -1) {
-            var pos = val.indexOf("+");
-            if (pos === 0 || pos === val.length - 1) {
-                this.setState({value: ""});
-            } else {
-                var first = val.substring(0, pos);
-                var second = val.substring(pos + 1);
-                var fN = parseInt(first);
-                var sN = parseInt(second);
-                this.setState({
-                    value: fN + sN
-                });
-            }
-
-        } else if (val.indexOf("+") === -1 && val.indexOf("–") !== -1 && val.indexOf("*") === -1 && val.indexOf("÷") === -1) {
-            var pos = val.indexOf("–");
-            if (pos === 0 || pos === val.length - 1) {
-                this.setState({value: ""});
-            } else {
-                var first = val.substring(0, pos);
-                var second = val.substring(pos + 1);
-                var fN = parseInt(first);
-                var sN = parseInt(second);
-                this.setState({
-                    value: fN - sN
-                });
-            }
-        } else if (val.indexOf("+") === -1 && val.indexOf("–") === -1 && val.indexOf("*") !== -1 && val.indexOf("÷") === -1) {
-            var pos = val.indexOf("*");
-            if (pos === 0 || pos === val.length - 1) {
-                this.setState({value: ""});
-            } else {
-                var first = val.substring(0, pos);
-                var second = val.substring(pos + 1);
-                var fN = parseInt(first);
-                var sN = parseInt(second);
-                this.setState({
-                    value: fN * sN
-                });
-            }
-        } else if (val.indexOf("+") === -1 && val.indexOf("–") === -1 && val.indexOf("*") === -1 && val.indexOf("÷") !== -1) {
-            var pos = val.indexOf("÷");
-            if (pos === 0 || pos === val.length - 1) {
-                this.setState({value: ""});
-            } else {
-                var first = val.substring(0, pos);
-                var second = val.substring(pos + 1);
-                var fN = parseInt(first);
-                var sN = parseInt(second);
-                this.setState({
-                    value: fN / sN
-                });
-            }
-        } else {
+        var sign = whichSign(val);
+        if (sign === "fail")
             this.setState({value: ""});
+        else {
+            var pos = val.indexOf(sign);
+            if (pos === 0 || pos === val.length - 1) {
+                this.setState({value: ""});
+            } else {
+                var firstNumber = parseInt(val.substring(0, pos));
+                var secondNumber = parseInt(val.substring(pos + 1));
+                var result = evaluate(firstNumber, sign, secondNumber);
+                this.setState({value: result});
+            }
         }
     },
     render: function() {
