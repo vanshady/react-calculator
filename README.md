@@ -2,6 +2,7 @@
 
 ### Usage
 ```
+npm install
 npm start
 ```
 And then go to public/index.html.
